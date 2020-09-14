@@ -15,6 +15,7 @@ services:
         PRIVATE_KEY_FILENAME: "keystore-file" # only file name
         PRIVATE_PASSWORD: "keystore-password"
         ENDPOINT_URL: "https://ctz-mainnet.rhizome.dev"
+        SERVICE_API: "https://ctz-mainnet.rhizome.dev/api/v3"
      cap_add:
         - SYS_TIME
      volumes:
