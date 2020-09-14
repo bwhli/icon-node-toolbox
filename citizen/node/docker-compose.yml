@@ -3,6 +3,7 @@ services:
   prep-node:
      image: "iconloop/prep-node"
      container_name: "prep-mainnet"
+     network_mode: host
      restart: "on-failure"
      environment:
         NETWORK_ENV: "mainnet"
