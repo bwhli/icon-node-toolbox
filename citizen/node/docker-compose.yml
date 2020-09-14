@@ -21,4 +21,4 @@ services:
         - ./data:/data # mount a data volumes
         - ./cert:/cert # Automatically generate cert key files here
      ports:
-         - "9000:9000"
+         - 9000:9000
