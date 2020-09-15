@@ -16,6 +16,7 @@ services:
         PRIVATE_KEY_FILENAME: "keystore-file" # only file name
         PRIVATE_PASSWORD: "keystore-password"
         ENDPOINT_URL: "endpoint-url"
+        RADIOSTATIONS: "radiostations-url"
      cap_add:
         - SYS_TIME
      volumes:
