@@ -1,7 +1,7 @@
 #!/bin/bash
 
-LINODE_ID=$(echo /home/icon/.linode_vars/LINODE_ID)
-LINODE_INSTANCE_REGION=$(echo /home/icon/.linode_vars/LINODE_INSTANCE_REGION)
+LINODE_ID=`/home/icon/.linode_vars/LINODE_ID`
+LINODE_INSTANCE_REGION=`/home/icon/.linode_vars/LINODE_INSTANCE_REGION`
 
 echo $LINODE_ID
 echo $LINODE_INSTANCE_REGION
