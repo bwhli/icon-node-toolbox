@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sleep 5
+sudo -u icon docker-compose -f /home/icon/citizen/docker-compose.yml up -d

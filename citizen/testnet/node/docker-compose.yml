@@ -1,0 +1,26 @@
+version: "3"
+services:
+  prep-node:
+     image: "iconloop/prep-node"
+     container_name: "prep-mainnet"
+     network_mode: host
+     restart: "on-failure"
+     environment:
+        NETWORK_ENV: "mainnet"
+        LOG_OUTPUT_TYPE: "file"
+        SWITCH_BH_VERSION3: "10324749"
+        CERT_PATH: "/cert"
+        LOOPCHAIN_LOG_LEVEL: "DEBUG"
+        ICON_LOG_LEVEL: "DEBUG"
+        FASTEST_START: "yes" # Restore from lastest snapshot DB
+        PRIVATE_KEY_FILENAME: "keystore-file" # only file name
+        PRIVATE_PASSWORD: "keystore-password"
+        ENDPOINT_URL: "endpoint-url"
+        RADIOSTATIONS: "radiostations-url"
+     cap_add:
+        - SYS_TIME
+     volumes:
+        - ./data:/data # mount a data volumes
+        - ./cert:/cert # Automatically generate cert key files here
+     ports:
+         - 9000:9000
