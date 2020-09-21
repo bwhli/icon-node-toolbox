@@ -1,4 +1,12 @@
 #!/bin/bash
 
-sleep 5
+# Start docker image.
 sudo -u icon docker-compose -f /home/icon/citizen/docker-compose.yml up -d
+
+# Restart HAProxy when node returns 200 response code.
+API_RESPONSE_CODE=$(curl --write-out %{http_code} --silent --output /dev/null http://127.0.0.1:9000/api/v1/avail/peer)
+until [[ $API_RESPONSE_CODE == "200" ]]
+do
+  sleep 15
+done
+service haproxy restart
