@@ -1,11 +1,12 @@
 #!/bin/bash
 
-INSTANCE_NAME=$(cat /home/icon/.gcp-vars/INSTANCE_NAME)
-ZONE_ID=$(cat /home/icon/.gcp-vars/ZONE_ID)
-REGION_ID=$(cat /home/icon/.gcp-vars/REGION_ID)
+INSTANCE_NAME=$(cat /home/icon/.gcp_vars/INSTANCE_NAME)
+ZONE_ID=$(cat /home/icon/.gcp_vars/ZONE_ID)
+REGION_ID=$(cat /home/icon/.gcp_vars/REGION_ID)
 
 # Get latest block height.
 LATEST_BLOCK_HEIGHT=$(curl -s http://127.0.0.1:9000/api/v1/avail/peer | jq '.block_height')
+echo $LATEST_BLOCK_HEIGHT
 
 # Stop node for snapshot.
 sudo -u icon docker-compose -f /home/icon/citizen/docker-compose.yml down
