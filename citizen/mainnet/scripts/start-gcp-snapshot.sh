@@ -6,7 +6,7 @@ ZONE_ID=$(cat /home/icon/.gcp_vars/ZONE_ID)
 REGION_ID=$(cat /home/icon/.gcp_vars/REGION_ID)
 
 # Only keep 4 newest snapshots, delete the rest.
-CURRENT_SNAPSHOTS=$(gcloud compute snapshots list --format="json(name)" --sort-by=~creationTimestamp)
+CURRENT_SNAPSHOTS=$(/snap/bin/gcloud compute snapshots list --format="json(name)" --sort-by=~creationTimestamp)
 CURRENT_SNAPSHOTS_LENGTH=$(echo $CURRENT_SNAPSHOTS | jq 'length')
 
 if [ $CURRENT_SNAPSHOTS_LENGTH -ge 5 ]; then
@@ -14,7 +14,7 @@ if [ $CURRENT_SNAPSHOTS_LENGTH -ge 5 ]; then
     if [ $i -gt 3 ]; then
       SNAPSHOT_NAME=$(echo $CURRENT_SNAPSHOTS | jq -r --arg index "$i" '.[$index|tonumber].name')
       echo "Deleting $SNAPSHOT_NAME..."
-      gcloud compute snapshots delete $SNAPSHOT_NAME --quiet
+      /snap/bin/gcloud compute snapshots delete $SNAPSHOT_NAME --quiet
     fi
   done
 fi
