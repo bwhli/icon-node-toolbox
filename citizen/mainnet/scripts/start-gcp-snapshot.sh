@@ -18,7 +18,7 @@ umount /dev/sdb
 gcloud compute disks snapshot $INSTANCE_NAME-citizen --snapshot-names=ctz-db-backup-bh$LATEST_BLOCK_HEIGHT --zone=$ZONE_ID --storage-location=us
 
 # Mount disk.
-mount -o discard,defaults /dev/sdb /home/icon/citizen
+mount -o discard,defaults /dev/sdb /home/icon/citizen/data
 
 # Start node.
 sudo -u icon docker-compose -f /home/icon/citizen/docker-compose.yml up -d
