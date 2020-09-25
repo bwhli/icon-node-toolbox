@@ -5,3 +5,5 @@ mount -o discard,defaults /dev/sdb /home/icon/citizen
 
 # Start docker image.
 sudo -u icon docker-compose -f /home/icon/citizen/docker-compose.yml up -d
+
+exit 0
