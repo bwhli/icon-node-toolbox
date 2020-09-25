@@ -9,13 +9,15 @@ REGION_ID=$(cat /home/icon/.gcp_vars/REGION_ID)
 CURRENT_SNAPSHOTS=$(gcloud compute snapshots list --format="json(name)" --sort-by=~creationTimestamp)
 CURRENT_SNAPSHOTS_LENGTH=$(echo $CURRENT_SNAPSHOTS | jq 'length')
 
-for i in $( seq 0 $(( $CURRENT_SNAPSHOTS_LENGTH - 1 )) ); do
-  if [ $i -gt 3 ]; then
-    SNAPSHOT_NAME=$(echo $CURRENT_SNAPSHOTS | jq -r --arg index "$i" '.[$index|tonumber].name')
-    echo "Deleting $SNAPSHOT_NAME..."
-    gcloud compute snapshots delete $SNAPSHOT_NAME --quiet
-  fi
-done
+if [ $CURRENT_SNAPSHOTS_LENGTH -ge 5 ]; then
+  for i in $( seq 0 $(( $CURRENT_SNAPSHOTS_LENGTH - 1 )) ); do
+    if [ $i -gt 3 ]; then
+      SNAPSHOT_NAME=$(echo $CURRENT_SNAPSHOTS | jq -r --arg index "$i" '.[$index|tonumber].name')
+      echo "Deleting $SNAPSHOT_NAME..."
+      gcloud compute snapshots delete $SNAPSHOT_NAME --quiet
+    fi
+  done
+fi
 
 # Get latest block height.
 LATEST_BLOCK_HEIGHT=$(curl -s http://127.0.0.1:9000/api/v1/avail/peer | jq '.block_height')
