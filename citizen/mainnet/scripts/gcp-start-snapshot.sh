@@ -6,7 +6,7 @@ ZONE_ID=$(cat /home/icon/.gcp_vars/ZONE_ID)
 REGION_ID=$(cat /home/icon/.gcp_vars/REGION_ID)
 
 # Only keep 4 newest snapshots, delete the rest.
-CURRENT_SNAPSHOTS=$(/snap/bin/gcloud compute snapshots list --format="json(name)" --sort-by=~creationTimestamp)
+CURRENT_SNAPSHOTS=$(/snap/bin/gcloud compute snapshots list --format="json(name)" --sort-by=~creationTimestamp --filter="name ~ ctz-db-backup")
 CURRENT_SNAPSHOTS_LENGTH=$(echo $CURRENT_SNAPSHOTS | jq 'length')
 
 if [ $CURRENT_SNAPSHOTS_LENGTH -ge 5 ]; then
