@@ -10,8 +10,8 @@ services:
         LOG_OUTPUT_TYPE: "file"
         SWITCH_BH_VERSION3: "10324749"
         CERT_PATH: "/cert"
-        LOOPCHAIN_LOG_LEVEL: "DEBUG"
-        ICON_LOG_LEVEL: "DEBUG"
+        LOOPCHAIN_LOG_LEVEL: "ERROR"
+        ICON_LOG_LEVEL: "ERROR"
         FASTEST_START: "yes" # Restore from lastest snapshot DB
         PRIVATE_KEY_FILENAME: "keystore-file" # only file name
         PRIVATE_PASSWORD: "keystore-password"
@@ -23,5 +23,5 @@ services:
         - ./data:/data # mount a data volumes
         - ./cert:/cert # Automatically generate cert key files here
      ports:
-         - 7100:7100
-         - 9000:9000
+         - "7100"
+         - "9000"
