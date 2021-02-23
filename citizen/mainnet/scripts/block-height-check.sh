@@ -12,7 +12,7 @@ if [[ $HTTP_CODE -eq "503" ]]; then
 	if [[ $BH2 -gt $BH1 ]]; then
 		echo "Block height is increasing, there is no problem."
 	else
-		echo "Block heigh is not increasing. Restarting node now..."
+		echo "Block height is not increasing. Restarting node now..."
 		cd /home/icon/prep && docker-compose down
 		cd /home/icon/prep && docker-compose up -d
 	fi
