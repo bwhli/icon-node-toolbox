@@ -1,5 +1,7 @@
 #!/bin/bash
 
+exec 1> >(logger -s -t $(basename $0)) 2>&1
+
 HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:9000/api/v1/avail/peer)
 
 if [[ $HTTP_CODE -eq "503" ]]; then
@@ -13,8 +15,8 @@ if [[ $HTTP_CODE -eq "503" ]]; then
 		echo "Block height is increasing, there is no problem."
 	else
 		echo "Block height is not increasing. Restarting node now..."
-		cd /home/icon/prep && docker-compose down
-		cd /home/icon/prep && docker-compose up -d
+		/usr/local/bin/docker-compose -f /home/icon/prep/docker-compose.yml down
+		/usr/local/bin/docker-compose -f /home/icon/prep/docker-compose.yml up -d
 	fi
 	else
 		echo "200 status code. Exiting now..."
